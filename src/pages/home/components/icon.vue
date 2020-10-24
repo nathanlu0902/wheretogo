@@ -1,12 +1,12 @@
 <template>
 <div class="icons">
-  <swiper :options="swiperOption">
+  <swiper :options="swiperOptions">
     <swiper-slide v-for="(page, index) of pages" :key="index">
       <div class="icon" 
       v-for="item of page"
       :key="item.id">
         <div class='icon-image'>
-            <img class='image-content' :src='item.url'/>
+            <img class='image-content' :src='item.imgUrl'/>
         </div>
         <p class="icon-desc">{{item.desc}}</p>
       </div>
@@ -19,61 +19,30 @@
 <script>
 export default {
   name: 'icon', // 组件名
+  props: {
+    iconlist: Array
+  },
   data () {
     return {
-      iconList: [{
-        id: '0001',
-        url: 'https://tse1-mm.cn.bing.net/th/id/OIP.uvHQgVHPPycsGwKWQFVDCAHaHN?w=225&h=220&c=7&o=5&pid=1.7',
-        desc: 'first'
-      }, {
-        id: '0002',
-        url: 'https://tse1-mm.cn.bing.net/th/id/OIP.uvHQgVHPPycsGwKWQFVDCAHaHN?w=225&h=220&c=7&o=5&pid=1.7',
-        desc: '2'
-      }, {
-        id: '0003',
-        url: 'https://tse1-mm.cn.bing.net/th/id/OIP.uvHQgVHPPycsGwKWQFVDCAHaHN?w=225&h=220&c=7&o=5&pid=1.7',
-        desc: '3'
-      }, {
-        id: '0004',
-        url: 'https://tse1-mm.cn.bing.net/th/id/OIP.uvHQgVHPPycsGwKWQFVDCAHaHN?w=225&h=220&c=7&o=5&pid=1.7',
-        desc: '4'
-      }, {
-        id: '0005',
-        url: 'https://tse1-mm.cn.bing.net/th/id/OIP.uvHQgVHPPycsGwKWQFVDCAHaHN?w=225&h=220&c=7&o=5&pid=1.7',
-        desc: '5'
-      }, {
-        id: '0006',
-        url: 'https://tse1-mm.cn.bing.net/th/id/OIP.uvHQgVHPPycsGwKWQFVDCAHaHN?w=225&h=220&c=7&o=5&pid=1.7',
-        desc: '6'
-      }, {
-        id: '0007',
-        url: 'https://tse1-mm.cn.bing.net/th/id/OIP.uvHQgVHPPycsGwKWQFVDCAHaHN?w=225&h=220&c=7&o=5&pid=1.7',
-        desc: '7'
-      }, {
-        id: '0008',
-        url: 'https://tse1-mm.cn.bing.net/th/id/OIP.uvHQgVHPPycsGwKWQFVDCAHaHN?w=225&h=220&c=7&o=5&pid=1.7',
-        desc: '8'
-      }, {
-        id: '0009',
-        url: 'https://tse1-mm.cn.bing.net/th/id/OIP.uvHQgVHPPycsGwKWQFVDCAHaHN?w=225&h=220&c=7&o=5&pid=1.7',
-        desc: '9'
-      }]
+      swiperOptions: {
+        autoplay: false
+      }
     }
   },
-    computed: {
-      pages () {
-        const pages=[]
-        this.iconList.forEach((item,index) => {
-          const page = Math.floor(index / 8)
-          if (!pages[page]) {
-            pages[page] = []
-          }
-          pages[page].push(item)
-        })
-        return pages
-    }
-    }
+  computed: {
+    pages () {
+      const pages=[]
+      this.iconlist.forEach((item,index) => {
+        const page = Math.floor(index / 8)
+        if (!pages[page]) {
+          pages[page] = []
+        }
+        pages[page].push(item)
+      })
+      return pages
   }
+  }
+}
 
 </script>
 
